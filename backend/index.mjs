@@ -1,14 +1,12 @@
-import nano from 'nano';
+import nano from "nano";
 
-const user = 'admin';
-const password = 'secret';
-const host = 'localhost';
+const user = "admin";
+const password = "secret";
+const host = "localhost";
 const port = 5984;
-const dbName = 'shopping-list';
+const dbName = "shopping-list";
 const reset = false;
 const debug = true;
-
-
 
 try {
   const connection = nano(`http://${user}:${password}@${host}:${port}`);
@@ -27,27 +25,26 @@ try {
   const shoppingList = await connection.db.use(dbName);
 
   const data = {
-    title: 'Chocolate',
+    title: "Chocolate",
     amount: 4,
-    unit: 'pieces'
-  }
+    unit: "pieces",
+  };
 
-  const response = await shoppingList.insert(data);
+  await create(shoppingList, data);
+  const allItems = await getAll(shoppingList);
+  console.log(allItems);
 
-  if (response.ok) {
-    console.log('insert was fine');
-  }
-
-
-
+  console.log(`count: ${await getCount(shoppingList)}`);
+  await deleteById(shoppingList, allItems[0]['_id'], allItems[0]['_rev']);
+  console.log(`count: ${await getCount(shoppingList)}`);
 
 
 } catch (e) {
   console.error(e);
 }
 
-async function create(table) {
-  const response = await shoppingList.insert(data);
+async function create(table, data) {
+  const response = await table.insert(data);
   if (response.ok && debug) {
     console.log(`insert was fine: ${response.id}`);
   }
@@ -55,17 +52,23 @@ async function create(table) {
 }
 
 async function getAll(table) {
-
+  const docs = [];
+  const doclist = await table.list();
+  doclist.rows.forEach((doc) => {
+    docs.push(getOneById(table, doc.id));
+  });
+  return Promise.all(docs);
 }
 
-async function getOneById(table, id) {
-
+async function getCount(table) {
+  return (await table.list()).rows.length;
 }
+function getOneById(table, id) {
 
-async function getOneByTitle(table, title) {
-
+  return table.get(id);
 }
 
 async function deleteById(table, id) {
-
+  const doc = await getOneById(table, id);
+  return table.destroy(doc['_id'], doc['_rev']);
 }
