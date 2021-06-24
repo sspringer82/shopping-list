@@ -7,6 +7,10 @@ type Props = {
 };
 
 const List: React.FC<Props> = ({ items }) => {
+  if (items.length === 0) {
+    return <div>Keine Artikel auf der Liste.</div>;
+  }
+
   return (
     <table>
       <thead>
