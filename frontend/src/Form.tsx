@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useState } from 'react';
-import Item from './Item';
+import { InputItem } from './Item';
 
 type Props = {
-  onSave: (item: Item) => void;
+  onSave: (item: InputItem) => void;
 }
 
 const Form: React.FC<Props> = ({onSave}) => {
-  const [item, setItem] = useState<Item>({
+  const [item, setItem] = useState<InputItem>({
     amount: 0,
     unit: '',
     title: '',

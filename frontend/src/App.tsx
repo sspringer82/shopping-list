@@ -1,14 +1,22 @@
 import "./App.css";
-import Item from "./Item";
+import Item, { BaseItem, InputItem } from "./Item";
 import List from "./List";
 
 import PouchDB from "pouchdb";
 import { useEffect, useState } from "react";
 import Form from "./Form";
 
-const db: PouchDB.Database<Item> = new PouchDB("shopping-list");
+const db: PouchDB.Database<BaseItem> = new PouchDB("shopping-list");
 
-async function insert(item: Item): Promise<Item> {
+function save(item: InputItem): Promise<Item> {
+  if (item._id) {
+
+  } else {
+  }
+  return insert(item);
+}
+
+async function insert(item: InputItem): Promise<Item> {
   const {id: _id, rev: _rev} = await db.post(item);
   return { ...item, _id, _rev };
 }
@@ -19,6 +27,10 @@ async function getAll(): Promise<Item[]> {
     .filter((doc) => doc !== undefined) as unknown as Item[];
 }
 
+async function remove(item: Item): Promise<void> {
+  db.remove(item);
+}
+
 function App() {
   const [items, setItems] = useState<Item[]>([]);
   useEffect(() => {
@@ -27,8 +39,8 @@ function App() {
 
   return (
     <>
-      <Form onSave={insert} />
-      <List items={items} />
+      <Form onSave={save} />
+      <List items={items} onDelete={remove} />
     </>
   );
 }

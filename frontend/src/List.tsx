@@ -4,9 +4,10 @@ import ListItem from './ListItem';
 
 type Props = {
   items: Item[];
+  onDelete: (item:Item) => void;
 };
 
-const List: React.FC<Props> = ({ items }) => {
+const List: React.FC<Props> = ({ items, onDelete }) => {
   if (items.length === 0) {
     return <div>Keine Artikel auf der Liste.</div>;
   }
@@ -22,7 +23,7 @@ const List: React.FC<Props> = ({ items }) => {
       </thead>
       <tbody>
         {items.map((item) => (
-          <ListItem item={item} />
+          <ListItem item={item} onDelete={onDelete}/>
         ))}
       </tbody>
     </table>
