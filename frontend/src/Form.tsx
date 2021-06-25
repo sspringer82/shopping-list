@@ -1,17 +1,22 @@
 import React, { ChangeEvent, useState } from 'react';
-import { InputItem } from './Item';
+import Item, { InputItem } from './Item';
 
 type Props = {
   onSave: (item: InputItem) => void;
+  item?: Item;
 };
 
-const Form: React.FC<Props> = ({ onSave }) => {
-  const [item, setItem] = useState<InputItem>({
-    done: false,
-    amount: 0,
-    unit: '',
-    title: '',
-  });
+const Form: React.FC<Props> = ({ onSave, item: inputItem }) => {
+  const initial = inputItem
+    ? inputItem
+    : {
+        done: false,
+        amount: 0,
+        unit: '',
+        title: '',
+      };
+
+  const [item, setItem] = useState<InputItem>(initial);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setItem((oldItem) => ({ ...oldItem, [e.target.name]: e.target.value }));

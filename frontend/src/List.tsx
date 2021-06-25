@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from './Form';
 import Item, { InputItem } from './Item';
 import ListItem from './ListItem';
@@ -10,6 +10,7 @@ type Props = {
 };
 
 const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
+  const [edit, setEdit] = useState('');
   let tbody: React.ReactElement[];
   if (items.length === 0) {
     tbody = [
@@ -18,14 +19,21 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
       </tr>,
     ];
   } else {
-    tbody = items.map((item) => (
-      <ListItem
-        key={item._id}
-        item={item}
-        onDelete={onDelete}
-        onSave={onSave}
-      />
-    ));
+    tbody = items.map((item) => {
+      if (item._id === edit) {
+        return <Form onSave={onSave} item={item} />;
+      } else {
+        return (
+          <ListItem
+            key={item._id}
+            item={item}
+            onDelete={onDelete}
+            onSave={onSave}
+            onEdit={setEdit}
+          />
+        );
+      }
+    });
   }
 
   return (
@@ -40,7 +48,7 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
       </thead>
       <tbody>
         {tbody}
-        <Form onSave={onSave} />
+        {edit === '' && <Form onSave={onSave} />}
       </tbody>
     </table>
   );

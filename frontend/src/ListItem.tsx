@@ -5,9 +5,10 @@ type Props = {
   item: Item;
   onDelete: (item: Item) => void;
   onSave: (item: InputItem) => void;
+  onEdit: (id: string) => void;
 };
 
-const ListItem: React.FC<Props> = ({ item, onDelete, onSave }) => {
+const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
   return (
     <tr>
       <td>
@@ -21,7 +22,10 @@ const ListItem: React.FC<Props> = ({ item, onDelete, onSave }) => {
       <td style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
         {item.unit}
       </td>
-      <td style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
+      <td
+        style={{ textDecoration: item.done ? 'line-through' : 'none' }}
+        onClick={() => onEdit(item._id)}
+      >
         {item.title}
       </td>
       <td>
