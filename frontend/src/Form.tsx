@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import Item from './Item';
 
-const Form: React.FC = () => {
+type Props = {
+  onSave: (item: Item) => void;
+}
+
+const Form: React.FC<Props> = ({onSave}) => {
   const [item, setItem] = useState<Item>({
     amount: 0,
     unit: '',
     title: '',
   });
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setItem(oldItem => ({...oldItem, [e.target.name]: e.target.value}))
+  }
 
   return (
     <tr>
@@ -17,6 +25,7 @@ const Form: React.FC = () => {
           id="amount"
           placeholder="amount"
           value={item.amount}
+          onChange={handleChange}
         />
       </td>
       <td>
@@ -26,6 +35,7 @@ const Form: React.FC = () => {
           id="unit"
           placeholder="unit"
           value={item.unit}
+          onChange={handleChange}
         />
       </td>
       <td>
@@ -35,7 +45,11 @@ const Form: React.FC = () => {
           id="title"
           placeholder="title"
           value={item.title}
+          onChange={handleChange}
         />
+      </td>
+      <td>
+        <button onClick={() => onSave(item)}>speichern</button>
       </td>
     </tr>
   );
