@@ -4,7 +4,6 @@ import List from './List';
 
 import PouchDB from 'pouchdb';
 import { useEffect, useState } from 'react';
-import Form from './Form';
 
 const db: PouchDB.Database<BaseItem> = new PouchDB('shopping-list');
 
@@ -36,12 +35,7 @@ function App() {
     getAll().then((data) => setItems(data));
   });
 
-  return (
-    <>
-      <Form onSave={save} />
-      <List items={items} onDelete={remove} onSave={save} />
-    </>
-  );
+  return <List items={items} onDelete={remove} onSave={save} />;
 }
 
 export default App;
