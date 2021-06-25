@@ -1,13 +1,14 @@
 import React from 'react';
-import Item from './Item';
+import Item, { InputItem } from './Item';
 import ListItem from './ListItem';
 
 type Props = {
   items: Item[];
-  onDelete: (item:Item) => void;
+  onDelete: (item: Item) => void;
+  onSave: (item: InputItem) => void;
 };
 
-const List: React.FC<Props> = ({ items, onDelete }) => {
+const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
   if (items.length === 0) {
     return <div>Keine Artikel auf der Liste.</div>;
   }
@@ -23,7 +24,7 @@ const List: React.FC<Props> = ({ items, onDelete }) => {
       </thead>
       <tbody>
         {items.map((item) => (
-          <ListItem item={item} onDelete={onDelete}/>
+          <ListItem item={item} onDelete={onDelete} onSave={onSave} />
         ))}
       </tbody>
     </table>

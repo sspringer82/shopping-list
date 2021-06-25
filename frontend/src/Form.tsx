@@ -3,17 +3,18 @@ import { InputItem } from './Item';
 
 type Props = {
   onSave: (item: InputItem) => void;
-}
+};
 
-const Form: React.FC<Props> = ({onSave}) => {
+const Form: React.FC<Props> = ({ onSave }) => {
   const [item, setItem] = useState<InputItem>({
+    done: false,
     amount: 0,
     unit: '',
     title: '',
   });
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setItem(oldItem => ({...oldItem, [e.target.name]: e.target.value}))
+    setItem((oldItem) => ({ ...oldItem, [e.target.name]: e.target.value }));
   }
 
   return (

@@ -2,7 +2,8 @@ export type BaseItem = {
   amount: number;
   unit: string;
   title: string;
-}
+  done: boolean;
+};
 
 type Item = {
   _id: string;
@@ -14,5 +15,3 @@ export type InputItem = {
   _id?: string;
   _rev?: string;
 } & BaseItem;
-
-
