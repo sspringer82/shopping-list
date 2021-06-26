@@ -3,10 +3,11 @@ import Item, { InputItem } from './Item';
 
 type Props = {
   onSave: (item: InputItem) => void;
+  onCancel: () => void;
   item?: Item;
 };
 
-const Form: React.FC<Props> = ({ onSave, item: inputItem }) => {
+const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
   const initial = inputItem
     ? inputItem
     : {
@@ -56,6 +57,7 @@ const Form: React.FC<Props> = ({ onSave, item: inputItem }) => {
       </td>
       <td>
         <button onClick={() => onSave(item)}>speichern</button>
+        <button onClick={onCancel}>abbrechen</button>
       </td>
     </tr>
   );

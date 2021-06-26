@@ -11,6 +11,16 @@ type Props = {
 
 const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
   const [edit, setEdit] = useState('');
+
+  function handleSave(inputItem: InputItem) {
+    setEdit('');
+    onSave(inputItem);
+  }
+
+  function handleCancel() {
+    setEdit('');
+  }
+
   let tbody: React.ReactElement[];
   if (items.length === 0) {
     tbody = [
@@ -21,14 +31,14 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
   } else {
     tbody = items.map((item) => {
       if (item._id === edit) {
-        return <Form onSave={onSave} item={item} />;
+        return <Form onSave={handleSave} item={item} onCancel={handleCancel} />;
       } else {
         return (
           <ListItem
             key={item._id}
             item={item}
             onDelete={onDelete}
-            onSave={onSave}
+            onSave={handleSave}
             onEdit={setEdit}
           />
         );
@@ -48,7 +58,7 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
       </thead>
       <tbody>
         {tbody}
-        {edit === '' && <Form onSave={onSave} />}
+        {edit === '' && <Form onSave={handleSave} onCancel={handleCancel} />}
       </tbody>
     </table>
   );
