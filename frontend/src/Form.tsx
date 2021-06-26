@@ -57,7 +57,14 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
       </td>
       <td>
         <button onClick={() => onSave(item)}>speichern</button>
-        <button onClick={onCancel}>abbrechen</button>
+        <button
+          onClick={() => {
+            setItem(initial);
+            onCancel();
+          }}
+        >
+          abbrechen
+        </button>
       </td>
     </tr>
   );

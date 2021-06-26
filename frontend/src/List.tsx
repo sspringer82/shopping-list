@@ -24,14 +24,21 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
   let tbody: React.ReactElement[];
   if (items.length === 0) {
     tbody = [
-      <tr>
+      <tr key="empty">
         <td colSpan={5}>Keine Artikel auf der Liste.</td>
       </tr>,
     ];
   } else {
     tbody = items.map((item) => {
       if (item._id === edit) {
-        return <Form onSave={handleSave} item={item} onCancel={handleCancel} />;
+        return (
+          <Form
+            onSave={handleSave}
+            item={item}
+            onCancel={handleCancel}
+            key="form"
+          />
+        );
       } else {
         return (
           <ListItem
@@ -58,7 +65,9 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
       </thead>
       <tbody>
         {tbody}
-        {edit === '' && <Form onSave={handleSave} onCancel={handleCancel} />}
+        {edit === '' && (
+          <Form onSave={handleSave} onCancel={handleCancel} key="form" />
+        )}
       </tbody>
     </table>
   );
