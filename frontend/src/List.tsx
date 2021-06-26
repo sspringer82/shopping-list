@@ -59,7 +59,6 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
         <tr>
           <th></th>
           <th>Menge</th>
-          <th>Einheit</th>
           <th>Artikel</th>
         </tr>
       </thead>

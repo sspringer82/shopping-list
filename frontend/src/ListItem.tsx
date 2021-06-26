@@ -17,10 +17,7 @@ const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
         </button>
       </td>
       <td style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-        {item.amount}
-      </td>
-      <td style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-        {item.unit}
+        {item.amount} {item.unit}
       </td>
       <td
         style={{ textDecoration: item.done ? 'line-through' : 'none' }}
