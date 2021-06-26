@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import 'typeface-roboto-material'
+import 'typeface-roboto'
 
 ReactDOM.render(
   <React.StrictMode>

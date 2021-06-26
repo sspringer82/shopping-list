@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import Form from './Form';
-import Item, { InputItem } from './Item';
-import ListItem from './ListItem';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import React, { useState } from "react";
+import Form from "./Form";
+import Item, { InputItem } from "./Item";
+import ListItem from "./ListItem";
 
 type Props = {
   items: Item[];
@@ -10,15 +11,15 @@ type Props = {
 };
 
 const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
-  const [edit, setEdit] = useState('');
+  const [edit, setEdit] = useState("");
 
   function handleSave(inputItem: InputItem) {
-    setEdit('');
+    setEdit("");
     onSave(inputItem);
   }
 
   function handleCancel() {
-    setEdit('');
+    setEdit("");
   }
 
   let tbody: React.ReactElement[];
@@ -54,21 +55,24 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Menge</th>
-          <th>Artikel</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tbody}
-        {edit === '' && (
-          <Form onSave={handleSave} onCancel={handleCancel} key="form" />
-        )}
-      </tbody>
-    </table>
+    <TableContainer>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell>Menge</TableCell>
+            <TableCell>Artikel</TableCell>
+            <TableCell></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {tbody}
+          {edit === "" && (
+            <Form onSave={handleSave} onCancel={handleCancel} key="form" />
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

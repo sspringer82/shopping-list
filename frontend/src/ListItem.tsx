@@ -1,3 +1,4 @@
+import { TableRow, TableCell, Button } from '@material-ui/core';
 import React from 'react';
 import Item, { InputItem } from './Item';
 
@@ -10,25 +11,25 @@ type Props = {
 
 const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
   return (
-    <tr>
-      <td>
-        <button onClick={() => onSave({ ...item, done: !item.done })}>
+    <TableRow>
+      <TableCell>
+        <Button onClick={() => onSave({ ...item, done: !item.done })}>
           {item.done ? 'zurück' : 'gekauft'}
-        </button>
-      </td>
-      <td style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
+        </Button>
+      </TableCell>
+      <TableCell style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
         {item.amount} {item.unit}
-      </td>
-      <td
+      </TableCell>
+      <TableCell
         style={{ textDecoration: item.done ? 'line-through' : 'none' }}
         onClick={() => onEdit(item._id)}
       >
         {item.title}
-      </td>
-      <td>
-        <button onClick={() => onDelete(item)}>löschen</button>
-      </td>
-    </tr>
+      </TableCell>
+      <TableCell>
+        <Button onClick={() => onDelete(item)}>löschen</Button>
+      </TableCell>
+    </TableRow>
   );
 };
 
