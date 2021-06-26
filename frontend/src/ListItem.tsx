@@ -13,7 +13,7 @@ const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
     <tr>
       <td>
         <button onClick={() => onSave({ ...item, done: !item.done })}>
-          done
+          {item.done ? 'zurück' : 'gekauft'}
         </button>
       </td>
       <td style={{ textDecoration: item.done ? 'line-through' : 'none' }}>

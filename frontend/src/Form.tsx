@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from 'react';
-import Item, { InputItem } from './Item';
+import React, { ChangeEvent, useState } from "react";
+import Item, { InputItem } from "./Item";
 
 type Props = {
   onSave: (item: InputItem) => void;
@@ -12,9 +12,9 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
     ? inputItem
     : {
         done: false,
-        amount: 0,
-        unit: '',
-        title: '',
+        amount: "",
+        unit: "",
+        title: "",
       };
 
   const [item, setItem] = useState<InputItem>(initial);
@@ -25,24 +25,25 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
 
   return (
     <tr>
+      <td></td>
       <td>
         <input
           type="text"
           name="amount"
           id="amount"
-          placeholder="amount"
+          placeholder="Menge"
           value={item.amount}
           onChange={handleChange}
+          style={{ width: 40 }}
         />
-      </td>
-      <td>
         <input
           type="text"
           name="unit"
           id="unit"
-          placeholder="unit"
+          placeholder="Einheit"
           value={item.unit}
           onChange={handleChange}
+          style={{ width: 40 }}
         />
       </td>
       <td>
@@ -50,13 +51,20 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
           type="text"
           name="title"
           id="title"
-          placeholder="title"
+          placeholder="Artikel"
           value={item.title}
           onChange={handleChange}
         />
       </td>
       <td>
-        <button onClick={() => onSave(item)}>speichern</button>
+        <button
+          onClick={() => {
+            onSave(item);
+            setItem(initial);
+          }}
+        >
+          speichern
+        </button>
         <button
           onClick={() => {
             setItem(initial);

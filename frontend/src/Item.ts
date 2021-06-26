@@ -1,5 +1,5 @@
 export type BaseItem = {
-  amount: number;
+  amount: string | number;
   unit: string;
   title: string;
   done: boolean;
