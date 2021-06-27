@@ -1,3 +1,4 @@
+import { TableRow, TableCell, Button, TextField } from '@material-ui/core';
 import React, { ChangeEvent, useState } from "react";
 import Item, { InputItem } from "./Item";
 
@@ -24,57 +25,60 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
   }
 
   return (
-    <tr>
-      <td></td>
-      <td>
-        <input
-          type="text"
+    <TableRow>
+      <TableCell></TableCell>
+      <TableCell>
+        <TextField
           name="amount"
           id="amount"
-          placeholder="Menge"
+          label="Menge"
           value={item.amount}
           onChange={handleChange}
-          style={{ width: 40 }}
+          style={{ width: 60 }}
         />
-        <input
-          type="text"
+        &nbsp;
+        <TextField
           name="unit"
           id="unit"
-          placeholder="Einheit"
+          label="Einheit"
           value={item.unit}
           onChange={handleChange}
-          style={{ width: 40 }}
+          style={{ width: 60 }}
         />
-      </td>
-      <td>
-        <input
-          type="text"
+      </TableCell>
+      <TableCell>
+        <TextField
           name="title"
           id="title"
-          placeholder="Artikel"
+          label="Artikel"
           value={item.title}
           onChange={handleChange}
         />
-      </td>
-      <td>
-        <button
+      </TableCell>
+      <TableCell>
+        <Button
           onClick={() => {
             onSave(item);
             setItem(initial);
           }}
+          color="primary"
+          variant="contained"
         >
           speichern
-        </button>
-        <button
+        </Button>
+        &nbsp;
+        <Button
           onClick={() => {
             setItem(initial);
             onCancel();
           }}
+          color="secondary"
+          variant="contained"
         >
           abbrechen
-        </button>
-      </td>
-    </tr>
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 };
 
