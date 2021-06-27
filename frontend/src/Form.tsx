@@ -1,6 +1,7 @@
 import { TableRow, TableCell, Button, TextField } from '@material-ui/core';
 import React, { ChangeEvent, useState } from "react";
 import Item, { InputItem } from "./Item";
+import StyledTableRow from './TableRow';
 
 type Props = {
   onSave: (item: InputItem) => void;
@@ -25,7 +26,7 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
   }
 
   return (
-    <TableRow>
+    <StyledTableRow>
       <TableCell></TableCell>
       <TableCell>
         <TextField
@@ -78,7 +79,7 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
           abbrechen
         </Button>
       </TableCell>
-    </TableRow>
+    </StyledTableRow>
   );
 };
 

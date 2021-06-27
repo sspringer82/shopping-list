@@ -4,6 +4,7 @@ import Item, { InputItem } from './Item';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import StyledTableRow from './TableRow';
 
 type Props = {
   item: Item;
@@ -14,7 +15,7 @@ type Props = {
 
 const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
   return (
-    <TableRow>
+    <StyledTableRow>
       <TableCell>
         <Button onClick={() => onSave({ ...item, done: !item.done })}>
           {item.done ? <ClearIcon style={{color: 'red'}} /> : <CheckIcon style={{color: 'green'}} />}
@@ -32,7 +33,7 @@ const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
       <TableCell>
         <IconButton onClick={() => onDelete(item)}><DeleteIcon style={{color: 'darkred'}} /></IconButton>
       </TableCell>
-    </TableRow>
+    </StyledTableRow>
   );
 };
 
