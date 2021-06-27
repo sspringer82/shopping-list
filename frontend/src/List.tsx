@@ -25,9 +25,9 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
   let tbody: React.ReactElement[];
   if (items.length === 0) {
     tbody = [
-      <tr key="empty">
-        <td colSpan={5}>Keine Artikel auf der Liste.</td>
-      </tr>,
+      <TableRow key="empty">
+        <TableCell colSpan={5}>Keine Artikel auf der Liste.</TableCell>
+      </TableRow>,
     ];
   } else {
     tbody = items.map((item) => {
