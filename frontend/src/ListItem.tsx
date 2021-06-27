@@ -1,6 +1,9 @@
-import { TableRow, TableCell, Button } from '@material-ui/core';
+import { TableRow, TableCell, Button, IconButton } from '@material-ui/core';
 import React from 'react';
 import Item, { InputItem } from './Item';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 
 type Props = {
   item: Item;
@@ -14,7 +17,7 @@ const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
     <TableRow>
       <TableCell>
         <Button onClick={() => onSave({ ...item, done: !item.done })}>
-          {item.done ? 'zurück' : 'gekauft'}
+          {item.done ? <ClearIcon style={{color: 'red'}} /> : <CheckIcon style={{color: 'green'}} />}
         </Button>
       </TableCell>
       <TableCell style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
@@ -27,7 +30,7 @@ const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
         {item.title}
       </TableCell>
       <TableCell>
-        <Button onClick={() => onDelete(item)}>löschen</Button>
+        <IconButton onClick={() => onDelete(item)}><DeleteIcon style={{color: 'darkred'}} /></IconButton>
       </TableCell>
     </TableRow>
   );
