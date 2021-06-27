@@ -16,7 +16,7 @@ type Props = {
 const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
   return (
     <StyledTableRow>
-      <TableCell>
+      <TableCell style={{maxWidth: 20}}>
         <Button onClick={() => onSave({ ...item, done: !item.done })}>
           {item.done ? (
             <ClearIcon style={{ color: "red" }} />

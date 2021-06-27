@@ -1,4 +1,4 @@
-import { TableCell, Button, TextField, IconButton } from '@material-ui/core';
+import { TableCell, TextField, IconButton } from '@material-ui/core';
 import React, { ChangeEvent, useState } from "react";
 import Item, { InputItem } from "./Item";
 import StyledTableRow from './TableRow';
@@ -65,6 +65,7 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
             setItem(initial);
           }}
           color="primary"
+          style={{paddingRight: 6}}
         >
           <SaveIcon />
         </IconButton>
@@ -75,6 +76,7 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
             onCancel();
           }}
           color="secondary"
+          style={{paddingLeft: 6}}
         >
           <CancelIcon />
         </IconButton>
