@@ -1,11 +1,12 @@
-import './App.css';
-import Item, { BaseItem, InputItem } from './Item';
-import List from './List';
+import "./App.css";
+import Item, { BaseItem, InputItem } from "./Item";
+import List from "./List";
 
-import PouchDB from 'pouchdb';
-import { useEffect, useState } from 'react';
+import PouchDB from "pouchdb";
+import { useEffect, useState } from "react";
+import { Grid, Card, CardContent } from "@material-ui/core";
 
-const db: PouchDB.Database<BaseItem> = new PouchDB('shopping-list');
+const db: PouchDB.Database<BaseItem> = new PouchDB("shopping-list");
 
 function save(item: InputItem): Promise<Item> {
   if (item._id) {
@@ -35,7 +36,19 @@ function App() {
     getAll().then((data) => setItems(data));
   });
 
-  return <List items={items} onDelete={remove} onSave={save} />;
+  return (
+    <Grid container>
+      <Grid md={2}></Grid>
+      <Grid item md={8} sm={12}>
+        <Card>
+          <CardContent style={{ padding: 0 }}>
+            <List items={items} onDelete={remove} onSave={save} />
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid md={2}></Grid>
+    </Grid>
+  );
 }
 
 export default App;

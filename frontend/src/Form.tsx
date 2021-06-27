@@ -1,7 +1,9 @@
-import { TableRow, TableCell, Button, TextField } from '@material-ui/core';
+import { TableCell, Button, TextField, IconButton } from '@material-ui/core';
 import React, { ChangeEvent, useState } from "react";
 import Item, { InputItem } from "./Item";
 import StyledTableRow from './TableRow';
+import SaveIcon from '@material-ui/icons/Save';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 type Props = {
   onSave: (item: InputItem) => void;
@@ -28,7 +30,7 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
   return (
     <StyledTableRow>
       <TableCell></TableCell>
-      <TableCell>
+      <TableCell style={{minWidth: 125}}>
         <TextField
           name="amount"
           id="amount"
@@ -56,28 +58,26 @@ const Form: React.FC<Props> = ({ onSave, onCancel, item: inputItem }) => {
           onChange={handleChange}
         />
       </TableCell>
-      <TableCell>
-        <Button
+      <TableCell style={{minWidth: 100}}>
+        <IconButton
           onClick={() => {
             onSave(item);
             setItem(initial);
           }}
           color="primary"
-          variant="contained"
         >
-          speichern
-        </Button>
+          <SaveIcon />
+        </IconButton>
         &nbsp;
-        <Button
+        <IconButton
           onClick={() => {
             setItem(initial);
             onCancel();
           }}
           color="secondary"
-          variant="contained"
         >
-          abbrechen
-        </Button>
+          <CancelIcon />
+        </IconButton>
       </TableCell>
     </StyledTableRow>
   );
