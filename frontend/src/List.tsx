@@ -1,21 +1,19 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import React, { useState } from "react";
 import Form from "./Form";
-import Item, { InputItem } from "./Item";
+import { InputItem } from "./Item";
+import { save } from './list.service';
 import ListItem from "./ListItem";
+import { useList } from './useList';
 
-type Props = {
-  items: Item[];
-  onDelete: (item: Item) => void;
-  onSave: (item: InputItem) => void;
-};
+const List= (): JSX.Element => {
+  const items = useList();
 
-const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
   const [edit, setEdit] = useState("");
 
   function handleSave(inputItem: InputItem) {
     setEdit("");
-    onSave(inputItem);
+    save(inputItem);
   }
 
   function handleCancel() {
@@ -45,7 +43,6 @@ const List: React.FC<Props> = ({ items, onDelete, onSave }) => {
           <ListItem
             key={item._id}
             item={item}
-            onDelete={onDelete}
             onSave={handleSave}
             onEdit={setEdit}
           />

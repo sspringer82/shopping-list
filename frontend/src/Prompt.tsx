@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-const Prompt = () => {
+const Prompt = (): JSX.Element => {
   const deferredPrompt = useRef<BeforeInstallPromptEvent | null>(null);
 
   useEffect(() => {

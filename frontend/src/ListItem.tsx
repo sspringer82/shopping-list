@@ -5,15 +5,15 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import StyledTableRow from "./TableRow";
+import { remove } from './list.service';
 
 type Props = {
   item: Item;
-  onDelete: (item: Item) => void;
   onSave: (item: InputItem) => void;
   onEdit: (id: string) => void;
 };
 
-const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
+const ListItem = ({ item, onSave, onEdit }: Props): JSX.Element => {
   return (
     <StyledTableRow>
       <TableCell style={{maxWidth: 20}}>
@@ -37,7 +37,7 @@ const ListItem: React.FC<Props> = ({ item, onDelete, onSave, onEdit }) => {
         {item.title}
       </TableCell>
       <TableCell>
-        <IconButton onClick={() => onDelete(item)}>
+        <IconButton onClick={() => remove(item)}>
           <DeleteIcon style={{ color: "darkred" }} />
         </IconButton>
       </TableCell>
